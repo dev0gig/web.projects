@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quadrat mit Tastatur steuern</title>
+        <style>
+            main{
+                background: #242424;
+            }
+            .float-button{
+                position: fixed;
+                right: 20px;
+                top: 20px;
+                z-index: 2;
+            }   
+            #quadrat {
+                width: 50px;
+                height: 50px;
+                background-color: #240293;
+                position: absolute;
+                top: 100px;
+                left: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="float-button">
+                <button onclick="location.href='https://giga93bios.github.io/my-website'">
+                    <i class="material-icons">home</i>
+                </button>
+            </div>
+
+            <div id="quadrat"></div>
+
+            <script>
+                const quadrat = document.getElementById("quadrat");
+                let yPosition = 100;
+                let xPosition = 100;
+
+                document.addEventListener("keydown", function(event) {
+                        switch(event.key) {
+                    case "ArrowUp":
+                        yPosition -= 10;
+                        break; 
+                    case "ArrowDown":
+                        yPosition += 10;
+                        break;
+                    case "ArrowLeft":
+                        xPosition -= 10;
+                        break;
+                    case "ArrowRight":
+                        xPosition += 10;
+                        break;
+                }
+
+                quadrat.style.top = yPosition + "px";
+                quadrat.style.left = xPosition + "px";
+                });
+            </script>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<style>
+  [draggable=true] {
+    cursor: move;
+  }
+
+  div {
+    float: left;
+    width: 10em;
+    height: 300px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    background: white;
+  }
+
+  .zielzone p {
+    float: left;
+    margin: 1em;
+    border-radius: 50%;
+    border: 2px solid #333;
+    width: 2em;
+    height: 2em;
+  }
+
+  #kugel1 {
+    background: #dfac20;
+  }
+
+  #kugel2 {
+    background: #3983ab;
+  }
+
+  #kugel3 {
+    background: #c32e04;
+  }
+
+  #kugel4 {
+    background: #5a9900;
+  }
+
+  #kugel5 {
+    background: purple;
+  }
+
+  #kugel6 {
+    background: white;
+  }
+</style>
+
+<h1>HTML5 Drag and Drop 1 - besser</h1>
+<main>
+  <div id="div1" class="zielzone">
+    <p draggable="true" id="kugel1"></p>
+    <p draggable="true" id="kugel2"></p>
+    <p draggable="true" id="kugel3"></p>
+  </div>
+  <div id="div2" class="zielzone">
+    <p draggable="true" id="kugel4"></p>
+    <p draggable="true" id="kugel5"></p>
+    <p draggable="true" id="kugel6"></p>
+  </div>
+</main>
+
+<script>
+  function ziehen(ev) {
+	ev.dataTransfer.setData('text', ev.target.id);
+}
+
+function ablegenErlauben(ev) {
+	ev.preventDefault();
+}
+
+function ablegen(ev) {
+	ev.preventDefault();
+	let kugelId = ev.dataTransfer.getData('text');
+	let target = ev.target.closest(".zielzone");
+	target.appendChild(document.getElementById(kugelId));
+}
+document.addEventListener("DOMContentLoaded", function () {
+	for (let zielzone of document.querySelectorAll(".zielzone")) {
+		zielzone.addEventListener("drop", ablegen);
+		zielzone.addEventListener("dragover", ablegenErlauben);
+	};
+	for (let draggable of document.querySelectorAll("[draggable=true]")) {
+		draggable.addEventListener("dragstart", ziehen);
+	};
+});
+
+</script>
